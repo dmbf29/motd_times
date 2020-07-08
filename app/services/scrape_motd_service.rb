@@ -18,6 +18,7 @@ class ScrapeMotdService
         Time.zone = timezone
         time = Time.zone.parse(time)
         dt = Time.zone.local(date.year, date.month, date.day, time.hour, time.min, time.sec).in_time_zone
+        raise
         episodes[:future] << dt
       else
         episodes[:past] << date
