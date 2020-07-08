@@ -12,8 +12,8 @@
   </div>
   <div class="row justify-content-center">
     <ol>
-      <% @future.sort.each do |date| %>
-        <li><%= date.in_time_zone(@timezone).strftime('%A, %b %e, %l:%M %p') %></li>
+      <% @future.each do |episode| %>
+        <li><%= episode.time.strftime('%A, %b %e, %l:%M %p') %></li>
       <% end %>
     </ol>
   </div>
@@ -22,8 +22,8 @@
   </div>
   <div class="row justify-content-center">
     <ol>
-      <% @past.sort.reverse.each do |date| %>
-        <li><%= date.in_time_zone(@timezone).strftime('%A, %b %d') %></li>
+      <% @past.each do |episode| %>
+        <li><%= episode.time.strftime('%A, %b %d') %></li>
       <% end %>
     </ol>
   </div>
