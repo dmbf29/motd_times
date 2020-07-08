@@ -2,9 +2,9 @@ require 'nokogiri'
 require 'open-uri'
 
 class ScrapeMotdService
-
-  def initialize
-
+  attr_reader :timezone
+  def initialize(timezone)
+    @timezone
   end
 
   def call
@@ -15,7 +15,7 @@ class ScrapeMotdService
       date = Date.parse(element.search('.programme__titles').text.strip)
       if date > Date.today
         time = element.search('.timezone--time').text.strip
-        Time.zone = 'London'
+        Time.zone = timezone
         time = Time.zone.parse(time)
         dt = Time.zone.local(date.year, date.month, date.day, time.hour, time.min, time.sec).in_time_zone
         episodes[:future] << dt
