@@ -4,7 +4,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="form-group">
-      <%= select_tag :time_zone, options: ActiveSupport::TimeZone.all.sort, class: 'form-control', id: 'time_zones', selected: @timezone %>
+      <%= select_tag :time_zone, options_for_select(ActiveSupport::TimeZone.all.sort, @timezone), class: 'form-control', id: 'time_zones' %>
     </div>
   </div>
   <div class="row justify-content-center">
