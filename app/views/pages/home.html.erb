@@ -1,2 +1,35 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <h1>MOTD Times</h1>
+  </div>
+  <div class="row justify-content-center">
+    <% timezone = rack[:request].params['timezone'] || ActiveSupport::TimeZone.all.sort[37].to_s  %>
+    <p>This is the params value</p>
+    <p><%= rack[:request].params %></p>
+    <p><%= timezone %></p>
+    <% timezone = timezone.split('0) ').last %>
+    <div class="form-group">
+      <%= select_tag :time_zone, options: ActiveSupport::TimeZone.all.sort, class: 'form-control', id: 'time_zones', selected: ActiveSupport::TimeZone.all.find { |tz| tz.name == timezone } %>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <h4>Upcoming</h4>
+  </div>
+  <div class="row justify-content-center">
+    <ol>
+      <% future.sort.each do |date| %>
+        <li><%= date.in_time_zone(timezone).strftime('%A, %b %e, %l:%M %p') %></li>
+      <% end %>
+    </ol>
+  </div>
+  <div class="row justify-content-center">
+    <h4>Past</h4>
+  </div>
+  <div class="row justify-content-center">
+    <ol>
+      <% past.sort.reverse.each do |date| %>
+        <li><%= date.in_time_zone(timezone).strftime('%A, %b %d') %></li>
+      <% end %>
+    </ol>
+  </div>
+</div>
