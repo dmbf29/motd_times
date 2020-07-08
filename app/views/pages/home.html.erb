@@ -3,7 +3,7 @@
     <h1>MOTD Times</h1>
   </div>
   <div class="row justify-content-center">
-    <div class="form-group">
+    <div class="form-group episode mb-3">
       <%= select_tag :time_zone, options_for_select(ActiveSupport::TimeZone.all.sort, @timezone), class: 'form-control', id: 'time_zones' %>
     </div>
   </div>
@@ -11,20 +11,26 @@
     <h4>Upcoming</h4>
   </div>
   <div class="row justify-content-center">
-    <ol>
+    <ul class="list-unstyled">
       <% @future.each do |episode| %>
-        <li><%= episode.time.strftime('%A, %b %e, %l:%M %p') %></li>
+        <li class="episode">
+          <%= image_tag "motd#{episode.show}.jpg", alt: "alttext", width: '32px', style: 'margin-right:8px' %>
+          <%= episode.time.strftime('%A, %b %e, %l:%M %p') %>
+        </li>
       <% end %>
-    </ol>
+    </ul>
   </div>
   <div class="row justify-content-center">
     <h4>Past</h4>
   </div>
   <div class="row justify-content-center">
-    <ol>
+    <ul class="list-unstyled">
       <% @past.each do |episode| %>
-        <li><%= episode.time.strftime('%A, %b %d') %></li>
+        <li class="episode">
+          <%= image_tag "motd#{episode.show}.jpg", alt: "alttext", width: '32px', style: 'margin-right:8px' %>
+          <%= episode.time.strftime('%A, %b %d') %>
+        </li>
       <% end %>
-    </ol>
+    </ul>
   </div>
 </div>

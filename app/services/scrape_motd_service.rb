@@ -18,7 +18,7 @@ class ScrapeMotdService
       doc = Nokogiri::HTML(html_content)
       doc.search('.episode-guide__episode').each do |element|
         date = Date.parse(element.search('.programme__titles').text.strip)
-        if date > Date.today
+        if date >= Date.today
           time = element.search('.timezone--time').text.strip
           Time.zone = 'London'
           time = Time.zone.parse(time)
