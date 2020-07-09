@@ -2,11 +2,12 @@ require 'nokogiri'
 require 'open-uri'
 
 class ScrapeMotdService
-  attr_reader :timezone
+  # attr_reader :timezone
 
-  def initialize(timezone)
-    @timezone = timezone
-  end
+  # moving timezone into controller since scraping is now background job
+  # def initialize(timezone)
+  #   @timezone = timezone
+  # end
 
   def call
     # MOTD => m0007fnr / MOTD2 => m0007m8m
@@ -22,10 +23,11 @@ class ScrapeMotdService
           time = element.search('.timezone--time').text.strip
           Time.zone = 'London'
           time = Time.zone.parse(time)
-          dt = Time.zone.local(date.year, date.month, date.day, time.hour, time.min, time.sec).in_time_zone(timezone)
-          episodes[:future] << Episode.new(time: dt, show: index + 1, past: false)
+          dt = Time.zone.local(date.year, date.month, date.day, time.hour, time.min, time.sec).utc
+          # dt = Time.zone.local(date.year, date.month, date.day, time.hour, time.min, time.sec)
+          Episode.new(time: dt, show: index + 1, past: false)
         else
-          episodes[:past] << Episode.new(time: date, show: index + 1, past: true)
+          Episode.new(time: date, show: index + 1, past: true)
         end
       end
     end
