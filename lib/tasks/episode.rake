@@ -35,7 +35,7 @@ namespace :episode do
     ep.save
 
     # can't find one for MOTD2 Jun 21
-    # ep = Episode.find(136)
+    # ep = Episode.find(36)
     # ep.reddit_link = nil
     # ep.save
 
