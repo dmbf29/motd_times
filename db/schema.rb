@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2020_07_09_022638) do
 
   create_table "episodes", force: :cascade do |t|
     t.datetime "time"
+    t.date "date"
     t.integer "show"
     t.boolean "past"
     t.string "reddit_link"
