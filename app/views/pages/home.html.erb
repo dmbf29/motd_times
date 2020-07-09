@@ -13,8 +13,10 @@
       <ul class="list-unstyled m-0">
         <% @future.each do |episode| %>
           <li class="episode">
-            <%= image_tag "motd#{episode.show}.jpg", alt: "alttext", width: '32px', style: 'margin-right:8px' %>
-            <%= episode.time.in_time_zone(@timezone).strftime('%A, %b %e, %l:%M %p') %>
+            <div>
+              <%= image_tag "motd#{episode.show}.jpg", alt: "alttext", width: '32px', style: 'margin-right:8px' %>
+              <%= episode.time.in_time_zone(@timezone).strftime('%A, %b %e, %l:%M %p') %>
+            </div>
           </li>
         <% end %>
       </ul>
@@ -27,8 +29,15 @@
       <ul class="list-unstyled m-0">
         <% @past.each do |episode| %>
           <li class="episode">
-            <%= image_tag "motd#{episode.show}.jpg", alt: "alttext", width: '32px', style: 'margin-right:8px' %>
-            <%= episode.date.in_time_zone(@timezone).strftime('%A, %b %d') %>
+            <div>
+              <%= image_tag "motd#{episode.show}.jpg", alt: "alttext", width: '32px', style: 'margin-right:4px' %>
+              <%= episode.date.in_time_zone(@timezone).strftime('%A, %b %d') %>
+            </div>
+            <% if episode.reddit_link %>
+              <%= link_to episode.reddit_link, class: 'reddit-link', target: '_blank' do %>
+                <i class="fab fa-reddit"></i>
+              <% end %>
+            <% end %>
           </li>
         <% end %>
       </ul>
