@@ -29,6 +29,7 @@ class ScrapeMotdService
           dt = Time.zone.local(date.year, date.month, date.day, time.hour, time.min, time.sec)
           episode.update(time: dt) unless dt == episode.time
         else
+          puts "creating a new episode with date: #{date}"
           # create episode
           time = element.search('.timezone--time').text.strip
           dt = nil
