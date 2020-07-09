@@ -1,11 +1,8 @@
-class Episode
-  # MOTD => m0007fnr / MOTD2 => m0007m8m
-  attr_reader :time, :show, :past
+class Episode < ApplicationRecord
+  validates_uniqueness_of :date
 
-  def initialize(attributes = {})
-    @time = attributes[:time]
-    @show = attributes[:show]
-    @past = attributes[:past]
+  def set_in_past!
+    past = true
+    save
   end
-
 end

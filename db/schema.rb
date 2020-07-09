@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_08_060911) do
+ActiveRecord::Schema.define(version: 2020_07_09_022638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "episodes", force: :cascade do |t|
+    t.datetime "time"
+    t.date "date"
+    t.integer "show"
+    t.boolean "past"
+    t.string "reddit_link"
+    t.string "motd_link"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end

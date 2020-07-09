@@ -14,7 +14,7 @@
         <% @future.each do |episode| %>
           <li class="episode">
             <%= image_tag "motd#{episode.show}.jpg", alt: "alttext", width: '32px', style: 'margin-right:8px' %>
-            <%= episode.time.strftime('%A, %b %e, %l:%M %p') %>
+            <%= episode.time.in_time_zone(@timezone).strftime('%A, %b %e, %l:%M %p') %>
           </li>
         <% end %>
       </ul>
@@ -28,7 +28,7 @@
         <% @past.each do |episode| %>
           <li class="episode">
             <%= image_tag "motd#{episode.show}.jpg", alt: "alttext", width: '32px', style: 'margin-right:8px' %>
-            <%= episode.time.strftime('%A, %b %d') %>
+            <%= episode.date.in_time_zone(@timezone).strftime('%A, %b %d') %>
           </li>
         <% end %>
       </ul>
