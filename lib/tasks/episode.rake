@@ -4,6 +4,11 @@ namespace :episode do
     ScrapeMotdJob.perform_now
   end
 
+  desc "Scrapes Reddit to update links"
+  task reddit: :environment do
+    ScrapeRedditJob.perform_now
+  end
+
   desc "Manually seed specific episodes with reddit posts"
   task manual_reddit: :environment do
     ep = Episode.find(8)
