@@ -5,7 +5,7 @@ class PagesController < ApplicationController
     timezone_name = params[:timezone]&.split('0) ')&.last || cookies[:timezone] || 'London'
     @timezone = ActiveSupport::TimeZone.all.find { |tz| tz.name == timezone_name }
     @future = Episode.where(past: false).order(:date)
-    @past = Episode.where(past: true).order(date: :desc)
+    @past = Episode.where(past: true).where.not(reddit_link: nil).order(date: :desc)
     cookies[:timezone] = timezone_name
   end
 end
