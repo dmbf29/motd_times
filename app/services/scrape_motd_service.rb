@@ -11,8 +11,11 @@ class ScrapeMotdService
     motds.each_with_index do |motd_id, index|
       html_content = open("https://www.bbc.co.uk/programmes/#{motd_id}/episodes/guide.2013inc?nestedlevel=3").read
 
+
       doc = Nokogiri::HTML(html_content)
       doc.search('.episode-guide__episode').each do |element|
+        next unless element.search('.programme__titles').text.strip =~ /\A\d/
+
         date = Date.parse(element.search('.programme__titles').text.strip)
         episode = Episode.find_by(date: date)
 
