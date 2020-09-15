@@ -31,7 +31,32 @@
     <div class="episodes">
       <h4>Past</h4>
       <ul class="list-unstyled m-0">
-        <% @past.each do |episode| %>
+        <% if @future.any? %>
+          <% @past.each do |episode| %>
+            <li class="episode">
+              <div>
+                <%= image_tag "motd#{episode.show}.jpg", alt: "alttext", width: '32px', style: 'margin-right:4px' %>
+                <%= episode.date.in_time_zone(@timezone).strftime('%A, %b %d') %>
+              </div>
+              <% if episode.reddit_link %>
+                <%= link_to episode.reddit_link, class: 'reddit-link', target: '_blank' do %>
+                  <i class="fab fa-reddit"></i>
+                <% end %>
+              <% end %>
+            </li>
+          <% end %>
+        <% else %>
+          <li class="episode">None yet.</li>
+        <% end %>
+      </ul>
+      <%= select_tag :time_zone, options_for_select(@time_zones, @timezone), class: 'form-control', style: 'display:none' %>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="episodes">
+      <h4>Previous Seasons</h4>
+      <ul class="list-unstyled m-0">
+        <% @previous.each do |episode| %>
           <li class="episode">
             <div>
               <%= image_tag "motd#{episode.show}.jpg", alt: "alttext", width: '32px', style: 'margin-right:4px' %>
