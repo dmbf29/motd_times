@@ -8,8 +8,6 @@ class ScrapeRedditService
   def call
     # until not too many requests
     response = HTTParty.get(url, headers: { 'User-agent': 'motd-times' })
-    p response
-    p response['data']
     return unless response['data']
 
     posts = response['data']['children']

@@ -5,8 +5,9 @@ class ScrapeMotdService
   # moved timezone into controller since scraping is now background job
 
   def call
-    # MOTD => m0007fnr / MOTD2 => m0007m8m
-    motds = ['m0007fnr', 'm0007m8m']
+    # MOTD => m0007fnr / MOTD2 => m0007m8m / Season '19-'20
+    # MOTD => m000m7x5 / MOTD2 => m000mn4w
+    motds = ['m000m7x5', 'm000mn4w']
     motds.each_with_index do |motd_id, index|
       html_content = open("https://www.bbc.co.uk/programmes/#{motd_id}/episodes/guide.2013inc?nestedlevel=3").read
 
