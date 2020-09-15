@@ -9,6 +9,14 @@ namespace :episode do
     ScrapeRedditJob.perform_now
   end
 
+  desc "Move all episodes to previos seasons"
+  task make_previous: :environment do
+    Episode.find_each do |ep|
+      ep.previous_season = true
+      ep.save
+    end
+  end
+
   desc "Manually seed specific episodes with reddit posts"
   task manual_reddit: :environment do
     ep = Episode.find(8)
