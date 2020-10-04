@@ -21,7 +21,9 @@ class ScrapeMotdService
 
         Time.zone = 'London'
         if episode
-          puts "found an episode with date: #{date}"
+          puts "Episode ID: #{episode.id} | found an episode with date: #{date}"
+          puts "Episode past? #{episode.past?}"
+          puts "Episode show? #{episode.show?}"
           # if the episode has aired but hasn't been changed in DB
           episode.set_in_past! if episode.time&.past? && !episode.past
 
