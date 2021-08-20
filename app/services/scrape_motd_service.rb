@@ -16,8 +16,9 @@ class ScrapeMotdService
       doc = Nokogiri::HTML(html_content)
       doc.search('.broadcast').each do |element|
         is_repeat = element.search('.programme__synopsis').text.scan(/\(R\)/).any?
-        next unless element.search('.programme__titles').text.strip =~ /\A\d/ || !is_repeat
+        next unless element.search('.programme__titles').text.strip =~ /\A\d/ && !is_repeat
 
+        binding.pry
         date = Date.parse(element.search('.programme__titles').text.strip)
         episode = Episode.find_by(date: date)
 
