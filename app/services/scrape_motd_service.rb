@@ -18,7 +18,6 @@ class ScrapeMotdService
         is_repeat = element.search('.programme__synopsis').text.scan(/\(R\)/).any?
         next unless element.search('.programme__titles').text.strip =~ /\A\d/ && !is_repeat
 
-        binding.pry
         date = Date.parse(element.search('.programme__titles').text.strip)
         episode = Episode.find_by(date: date)
 
