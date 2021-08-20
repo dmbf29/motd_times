@@ -41,3 +41,15 @@
     opacity: 1;
   }
 }
+
+.hidden-div {
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.2s ease-in;
+}
+
+#btn-show {
+  &:hover {
+    cursor: pointer;
+  }
+}

@@ -27,7 +27,9 @@ import "bootstrap";
 
 // Internal imports, e.g:
 import { timezoneChange } from '../components/timezones';
+import { toggleOpen } from '../components/collapse';
 
 document.addEventListener('turbolinks:load', () => {
   timezoneChange();
+  toggleOpen();
 });
