@@ -26,15 +26,8 @@ require("channels")
 import "bootstrap";
 
 // Internal imports, e.g:
-// import { initSelect2 } from '../components/init_select2';
+import { timezoneChange } from '../components/timezones';
 
 document.addEventListener('turbolinks:load', () => {
-  const timeZones = document.querySelector('#time_zones')
-  if (timeZones) {
-    timeZones.addEventListener('change', (event) => {
-      const newZone = event.currentTarget.value
-      let url = window.location.href.split('?')[0] += `?timezone=${newZone}`;
-      window.location.href = url;
-    })
-  }
+  timezoneChange();
 });
