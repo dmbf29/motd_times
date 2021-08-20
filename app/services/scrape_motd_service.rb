@@ -7,13 +7,14 @@ class ScrapeMotdService
   def call
     # MOTD => m0007fnr / MOTD2 => m0007m8m / Season '19-'20
     # MOTD => m000m7x5 / MOTD2 => m000mn4w
-    motds = ['m000m7x5', 'm000mn4w']
-    motds.each_with_index do |motd_id, index|
-      html_content = open("https://www.bbc.co.uk/programmes/#{motd_id}/episodes/guide.2013inc?nestedlevel=3").read
-
+    # motds = ['m000m7x5', 'm000mn4w']
+    # this doesn't work with aired episodes
+    motds = ["https://www.bbc.co.uk/programmes/b007t9y1/broadcasts/upcoming", 'https://www.bbc.co.uk/programmes/b007t9yb/broadcasts/upcoming']
+    motds.each_with_index do |url, index|
+      html_content = open(url).read
 
       doc = Nokogiri::HTML(html_content)
-      doc.search('.episode-guide__episode').each do |element|
+      doc.search('.broadcast').each do |element|
         next unless element.search('.programme__titles').text.strip =~ /\A\d/
 
         date = Date.parse(element.search('.programme__titles').text.strip)
