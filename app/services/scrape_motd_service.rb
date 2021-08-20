@@ -30,7 +30,8 @@ class ScrapeMotdService
 
           # update time
           time = element.search('.timezone--time').text.strip
-          next if time.blank?
+          is_repeat = element.search('.programme__synopsis').text.scan(/\(R\)/).any?
+          next if time.blank? || is_repeat
 
           time = Time.zone.parse(time)
           dt = Time.zone.local(date.year, date.month, date.day, time.hour, time.min, time.sec)
