@@ -28,8 +28,10 @@ import "bootstrap";
 // Internal imports, e.g:
 import { timezoneChange } from '../components/timezones';
 import { toggleOpen } from '../components/collapse';
+import { initSelect2 } from '../components/init_select2';
 
 document.addEventListener('turbolinks:load', () => {
   timezoneChange();
   toggleOpen();
+  initSelect2();
 });
