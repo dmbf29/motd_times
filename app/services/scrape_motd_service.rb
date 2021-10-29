@@ -15,6 +15,7 @@ class ScrapeMotdService
 
       doc = Nokogiri::HTML(html_content)
       doc.search('.broadcast').each do |element|
+        puts
         is_repeat = element.search('.programme__synopsis').text.scan(/\(R\)/).any?
         next unless element.search('.programme__titles').text.strip =~ /\A\d/ && !is_repeat
 
@@ -45,7 +46,7 @@ class ScrapeMotdService
             time = Time.zone.parse(time)
             dt = Time.zone.local(date.year, date.month, date.day, time.hour, time.min, time.sec)
           end
-          Episode.create(time: dt, show: index + 1, past: date <= Date.today, date: date)
+          p Episode.create(time: dt, show: index + 1, past: date <= Date.today, date: date)
         end
       end
     end
